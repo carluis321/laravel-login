@@ -12,7 +12,7 @@ class HomeController extends Controller
 {
 	public function dashboard()
 	{
-		// Auth::logout();
+		Auth::logout();
 		return view('dashboard');
 	}
 
