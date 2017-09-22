@@ -1,0 +1,13 @@
+.panel {
+  margin-top: 7em;
+  border:1px solid #c3c6c7;
+}
+
+.panel .panel-heading{
+  background: #e7e9ea;
+  padding: 10px 30px;
+}
+
+.panel .panel-body{
+  padding: 25px;
+}
