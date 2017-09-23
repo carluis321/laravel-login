@@ -10,15 +10,15 @@ use Mail;
 
 class HomeController extends Controller
 {
-	public function dashboard()
+	public function index()
 	{
-		Auth::logout();
-		return view('dashboard');
+		// Auth::logout();
+		return view('index');
 	}
 
-    public function showLogin()
+    public function isAuth()
     {
-    	return view('login');
+    	return response()->json(Auth::check());
     }
 
     public function login(Request $request)
@@ -31,27 +31,18 @@ class HomeController extends Controller
     	$data = [];
 
     	if ($request->remember) {
-    		$data = array_except($request->all(), '_token');
-    		$data = array_except($request->all(), 'remember');
-
     		Auth::attempt($data, true);
     	}else{
-    		$data = array_except($request->all(), '_token');
+    		$data = array_except($request->all(), 'remember');
 
     		Auth::attempt($data);
     	}
 
     	if (Auth::check()) {
-    		return redirect('/');
+    		return response()->json(['process'=> 'success']);
     	}
 
-    	session()->flash('msg', 'Correo o contraseña incorrectos');
-    	return back();
-    }
-
-    public function showReset()
-    {
-    	return view('reset');
+        return response()->json(['process'=> 'warning', 'msg'=> 'Correo o contraseña incorrectos']);
     }
 
     public function resetPassword(Request $request)
@@ -78,9 +69,6 @@ class HomeController extends Controller
     	//     $message->subject('Se ha reestablecido la contraseña');
     	// });
 
-    	session()->flash('msg', 'Se ha reestablecido la contraseña, ingrese a su correo para ver la nueva contraseña');
-    	session()->flash('status', 'success');
-
-    	return back();
+    	return response()->json(['process' => 'success','msg' => 'Se ha reestablecido la contraseña, ingrese a su correo para ver la nueva contraseña']);
     }
 }

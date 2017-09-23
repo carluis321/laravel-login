@@ -11,15 +11,8 @@
 |
 */
 
-Route::middleware(['web'])->group(function (){
-	Route::get('/login', 'HomeController@showLogin')->name('login');
+Route::post('/login', 'HomeController@login');
+Route::post('/reset', 'HomeController@resetPassword');
 
-	Route::post('/login', 'HomeController@login');
-
-	Route::get('/reset-password', 'HomeController@showReset');
-	Route::post('/reset', 'HomeController@resetPassword');
-});
-
-Route::middleware(['auth', 'web'])->group(function (){
-	Route::get('/', 'HomeController@dashboard');
-});
+Route::get('/is-auth', 'HomeController@isAuth');
+Route::get('/', 'HomeController@index');
