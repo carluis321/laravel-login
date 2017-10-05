@@ -54,9 +54,7 @@ class HomeController extends Controller
     	$user = User::where('email', $request->email)->first();
 
     	if (!$user) {
-    		session()->flash('msg', 'Correo no registrado');
-    		session()->flash('status', 'warning');
-    		return back();
+    		return response()->json(['process' => 'warning','msg' => 'El correo ingresado no existe en la base de datos']);
     	}
 
     	$pass = str_random(20);
