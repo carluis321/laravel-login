@@ -59,7 +59,7 @@
 
           swal(data.data.msg);
 
-          this.$router.push('/');
+          this.$router.push('/login');
         }).catch((errors) => {
           for(var error in errors.response.data.errors){
             this.errors.push(errors.response.data.errors[error][0]);
